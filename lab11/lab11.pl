@@ -85,3 +85,9 @@ maxDigDown(0,R,R):-!.
 maxDigDown(N,Res,Prev):- N1 is N mod 10,
     (thdel(N1), N1 > Prev, NewC is N1; NewC is Prev),
     N2 is N div 10, maxDigDown(N2,Res,NewC).
+
+fibDown(1,1):-!.
+fibDown(2,1):-!.
+fibDown(N,X):-fibDown(N,X,1,1,2).
+fibDown(A,B,_,B,A):-!.
+fibDown(A,B,C,D,E):- T is C+D, E1 is E+1, fibDown(A,B,D,T,E1).

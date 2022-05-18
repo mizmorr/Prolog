@@ -79,3 +79,9 @@ maxdigUp(N,CurDig):-
     maxdigUp(X1,M1),
     M2 is N mod 10,
     (M2 > M1, thdel(M2), CurDig is M2; CurDig is M1).
+
+maxDigDown(N,Res):-maxDigDown(N,Res,0).
+maxDigDown(0,R,R):-!.
+maxDigDown(N,Res,Prev):- N1 is N mod 10,
+    (thdel(N1), N1 > Prev, NewC is N1; NewC is Prev),
+    N2 is N div 10, maxDigDown(N2,Res,NewC).
