@@ -59,3 +59,7 @@ grand_dats(X):-grand_da(Z,X),print(Z),nl,fail.
 mother(X,Y):- woman(X),parent(X,Y).
 grandma(X,Y):- mother(X,Z),(parent(Z,Y);parent(Y,Z)).
 grandma_and_son(X,Y):- (grandma(X,Y), man(Y));(man(X),grandma(Y,X)).
+multup(0, 1):-!.
+multup(Num, Res):- Digit is Num mod 10, NextNum is Num div 10,
+  multup(NextNum, Z),
+  Res is Z * Digit.
