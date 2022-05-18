@@ -63,3 +63,7 @@ multup(0, 1):-!.
 multup(Num, Res):- Digit is Num mod 10, NextNum is Num div 10,
   multup(NextNum, Z),
   Res is Z * Digit.
+multvniz(X,ResMult):-multvniz(X,ResMult,1).
+multvniz(0,Res,Res):-!.
+multvniz(X,ResMult,PrevMult):- X1 is X mod 10, CurMult is PrevMult*X1,
+X2 is X div 10, multvniz(X2,ResMult,CurMult).
