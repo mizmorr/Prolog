@@ -52,3 +52,6 @@ father(X):- father(Z,X), print(Z).
 
 wife(X,Y):- man(Y), woman(X), (parent(X,Y);parent(Y,X)).
 wife(X):- wife(Z,X), print(Z).
+
+grand_da(X,Y):- father(Y,Z),parent(Z,X), woman(X).
+grand_dats(X):-grand_da(Z,X),print(Z),nl,fail.
