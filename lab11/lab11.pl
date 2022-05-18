@@ -55,3 +55,7 @@ wife(X):- wife(Z,X), print(Z).
 
 grand_da(X,Y):- father(Y,Z),parent(Z,X), woman(X).
 grand_dats(X):-grand_da(Z,X),print(Z),nl,fail.
+
+mother(X,Y):- woman(X),parent(X,Y).
+grandma(X,Y):- mother(X,Z),(parent(Z,Y);parent(Y,Z)).
+grandma_and_son(X,Y):- (grandma(X,Y), man(Y));(man(X),grandma(Y,X)).
