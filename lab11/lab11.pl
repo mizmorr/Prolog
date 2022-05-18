@@ -49,3 +49,6 @@ parent(zhdana,zdislava).
 parent(zhdana,zlatomir).
 father(X,Y):- parent(X,Y),man(X).
 father(X):- father(Z,X), print(Z).
+
+wife(X,Y):- man(Y), woman(X), (parent(X,Y);parent(Y,X)).
+wife(X):- wife(Z,X), print(Z).
