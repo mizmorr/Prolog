@@ -73,6 +73,22 @@ fibup(2,1):-!.
 fibup(N,X):-N1 is N-1, fibup(N1,X1), N2 is N-2, fibup(N2,X2), X is X1+X2.
 
 thdel(X):-X1 is X mod 3, X1\=0.
+max(X,Y,Z):-(
+    X>=Y -> Z is X;
+    Y>X -> Z is Y).
+max(X,Y):-(
+    X>=Y -> print(X);
+    Y>X -> print(Y)).
+maxdig(0,0):-!.
+maxdig(N,CurDig):- N1 is N mod 10,N2 is N div 10,
+    maxdig(N2,NewDig),
+   (thdel(NewDig), max(N1,CurDig,NewDig); CurDig).
+
+countCifr3Up(0,0):-!.
+countCifr3Up(X,Count):- Dig is X mod 10,X1 is X div 10,
+    countCifr3Up(X1,NewCount),
+    (Dig>3,1 is Dig mod 2 , Count is NewCount+1; Count is NewCount).
+
 maxdigUp(0,1):-!.
 maxdigUp(N,CurDig):-
     X1 is N div 10,
