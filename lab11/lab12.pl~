@@ -42,7 +42,22 @@ maxDownN(X,D,Sum,CurDig,A):-D1 is D-1,
     maxDownN(X,D1,Sum,NewCur,A).
 maxdeterm(X,Res):-minDeldown(X,G), maxdownN(X,Res,G).
 
-res(X):-sumDigs(X,Res1),maxdeterm(X,Res2),Res1*Res2,!.
-test1(X,Res):-Res is X+1.
-test2(X,res):-res is X+2.
+res(X,Res):-sumDigs(X,Res1),maxdeterm(X,Res2), Res is Res1*Res2,!.
 
+%task14 (1.9)
+readL(0, []) :- !.
+readL(I, [X|T]) :- write("input - "),read(X), I1 is I - 1, readL(I1, T).
+
+writeL([]):-!.
+writeL([X|T]):-write(X),nl, writeL(T).
+listmin([H|T],Res):-listmin([H|T],Res,H).
+listmin([],Res,Res):-!.
+listmin([H|T],Res,Cur):-
+    (H<Cur, NewH is H; NewH is Cur),
+    listmin(T,Res,NewH).
+count([H|T],Res,Marker):-count([H|T],Res,0,Marker).
+count([],Res,Res,_):-!.
+count([H|T],PreRes,Res,Marker):-
+    (H==Marker, NewRes is Res+1;NewRes is Res),
+    count(T,PreRes,NewRes,Marker).
+countmin([H|T],Res):- listmin([H|T],Res1),count([H|T],Res,Res1).

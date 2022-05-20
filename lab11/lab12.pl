@@ -44,3 +44,29 @@ maxdeterm(X,Res):-minDeldown(X,G), maxdownN(X,Res,G).
 
 res(X,Res):-sumDigs(X,Res1),maxdeterm(X,Res2), Res is Res1*Res2,!.
 
+%task14 (1.9)
+readL(0, []) :- !.
+readL(I, [X|T]) :- write("input - "),read(X), I1 is I - 1, readL(I1, T).
+
+writeL([]):-!.
+writeL([X|T]):-write(X),nl, writeL(T).
+listmin([H|T],Res):-listmin([H|T],Res,H).
+listmin([],Res,Res):-!.
+listmin([H|T],Res,Cur):-
+    (H<Cur, NewH is H; NewH is Cur),
+    listmin(T,Res,NewH).
+count([H|T],Res,Marker):-count([H|T],Res,0,Marker).
+count([],Res,Res,_):-!.
+count([H|T],PreRes,Res,Marker):-
+    (H==Marker, NewRes is Res+1;NewRes is Res),
+    count(T,PreRes,NewRes,Marker).
+countmin([H|T],Res):- listmin([H|T],Res1),count([H|T],Res,Res1).
+newlist([H|T],X,Count,Numb):-newlist([H|T],X,0,Count,Numb).
+add(E,[],[E]).
+add(E,[H|T],[H|T1]):-add(E,T,T1).
+newlist([],_,Count,Count,_):-!.
+newlist([H|T],List,CurC,Count,Numb):-
+   (H\=Numb, CurC\=Count,  add(H,List,NewList), NewCurc is CurC;(H==Numb, CurC\=Count, add(H,List,NewList),NewCurc is CurC+1 ;(CurC==Count,!))),
+    newlist(T,NewList,NewCurc,Count,Numb).
+
+reslist(X,Res):-countmin(X,Res1),listmin(X,Res2),newlist(X,Res,Res1,Res2).
