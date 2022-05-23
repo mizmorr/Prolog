@@ -27,3 +27,25 @@ listPos(X,Res):-listPos(X,Res,[]).
 listPos([],Res,Res):-!.
 listPos([H|T],Res,CurL):-(H>=0,add(H,CurL,NewL);add([],CurL,NewL)),listPos(T,Res,NewL).
 listPosNeg(X,Res):- listPos(X,Pos), listNegat(X,Neg), append(Pos,Neg,Res).
+
+%task13
+listwout([H|T],Value,Res):-listwout([H|T],Value,Res,[]).
+listwout([],_,Res,Res):-!.
+listwout([H|T],Value,Res,CurList):-(H\=Value,add(H,CurList,NewL);add([],CurList,NewL)), listwout(T,Value,Res,NewL).
+
+listAllPairs(Value,X,Res):-listAllPairs(Value,X,Res,[]).
+listAllPairs(_,[],Res,Res):-!.
+listAllPairs(Value,[H|T],Res,CurL):- Sum is Value+H, add(Sum,CurL,NewL),listAllPairs(Value,T,Res,NewL).
+listAP(X,Res):-listAP(X,Res,[]).
+listAP([],Res,Res):-!.
+listAP([H|T],Res,CurList):-listAllPairs(H,T,Preres), append(Preres,CurList,NextL),listAP(T,Res,NextL).
+
+contains([], _):- !, fail.
+contains([H|_], H):- !.
+contains([_|T], N):- contains(T, N).
+
+countSmth(X,Res,List):-countSmth(X,Res,List,0).
+countSmth([],Res,_,Res):-!.
+countSmth([H|T],Res,List,CurN):- (contains(List,H),NewN is CurN+1;NewN is CurN), countSmth(T,Res,List,NewN).
+countDet(X,Res):- listAP(X,AP), countSmth(X,Res,AP).
+
