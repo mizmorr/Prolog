@@ -96,7 +96,7 @@ until([H|T],Res,Val):-until([H|T],Res,Val,[]).
 until([],Res,_,Res):-!.
 until([H|_],Res,Value,CurList):- H==Value, until([],Res,Value,CurList).
 until([H|T],Res,Value,CurList):-add(H,CurList,NewList), until(T,Res,Value,NewList).
-untilmin(X,Res):-listmin(X,Min), until(X,Res,Min).
+untilmin(X,Res):-listmin(X,Min), until(X,PreRes,Min),add(Min,PreRes,Res).
 after([H|T],Value,Res):-after([H|T],Value,Res,[],0).
 after([],_,Res,Res,1):-!.
 after([H|T],Value,Res,CurList,Marker):-Marker==0,(H==Value,NewM is 1;NewM is 0),after(T,Value,Res,CurList,NewM).

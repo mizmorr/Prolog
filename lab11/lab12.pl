@@ -104,3 +104,13 @@ after([H|T],Value,Res,CurList,Marker):- Marker==1, add(H,CurList,NewL), after(T,
 aftermax(X,Res):-listmax(X,Max), after(X,Max,PPPreRes),reverse2(PPPreRes,PPreRes),add(Max,PPreRes,PreRes),reverse2(PreRes,Res).
 mid(X,Res):-listmax(X,Max),listmin(X,Min),mid(X,Min,Max,Res).
 reslist12(X,Res):-untilmin(X,Unt), mid(X,PreMid),reverse2(PreMid,Mid), append(Unt,Mid,Preres), aftermax(X,Aft), append(Preres,Aft,Res).
+
+%task16 (1.22)
+
+countSmth([H|T],A,B,Res,Value):-countSmth([H|T],A,B,Res,0,0,Value).
+countSmth([],_,B,Count,B,Count,_):-!.
+countSmth([_|_],A,B,Res,N,CurCnt,Value):-N==B, countSmth([],A,B,Res,B,CurCnt,Value).
+countSmth([_|T],A,B,Res,N,CurCnt,Value):- N<A, N1 is N+1,countSmth(T,A,B,Res,N1,CurCnt,Value).
+countSmth([H|T],A,B,Res,N,CurCnt,Value):- N1 is N+1, (H==Value,NewCnt is CurCnt+1;NewCnt is CurCnt), countSmth(T,A,B,Res,N1,NewCnt,Value).
+countMin(X,A,B,Res):-listmin(X,Min),countSmth(X,A,B,Res,Min).
+
