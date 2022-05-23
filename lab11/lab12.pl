@@ -128,7 +128,7 @@ evennumber(X,Res):-evennumber(X,Res,0).
 evennumber([],R,R):-!.
 evennumber([H|T],Res,CurNum):- (0 is H mod 2, NewN is CurNum+1; NewN is CurNum), evennumber(T,Res,NewN).
 
-%task19 (1.34)
+%task19 (1.34) - Интервал
 
 interval(X,A,B,Res):-interval(X,A,B,Res,0,[]).
 interval([],_,B,Interval,B,Interval):-!.
@@ -136,4 +136,27 @@ interval([_|T],A,B,Res,N,CurInt):- N<A, N1 is N+1,interval(T,A,B,Res,N1,CurInt).
 interval([H|_],A,B,Res,N,CurInt):-N==B,add(H,CurInt,ResInt),  interval([],A,B,Res,B,ResInt).
 interval([H|T],A,B,Res,N,CurInt):- N1 is N+1, add(H,CurInt,Interval), interval(T,A,B,Res,N1,Interval).
 
+
+%task13
+
+prost(X):-X1 is X-1, prost(X,X1).
+prost(_,1):- !.
+prost(X,D) :- 0 is X mod D,!, fail.
+prost(X,D):- D1 is D-1, prost(X,D1).
+lenght(X,Res):-lenght(X,Res,0).
+lenght(0,Leng,Leng):-!.
+lenght(X,Res,CurLeng):- NewL is CurLeng+1, X1 is X div 10, lenght(X1,Res,NewL).
+isPand(X,Res):-uniqCount(X,X,Res,0).
+isPand(X):-isPand(X,Res), lenght(X,Leng), Res==Leng.
+countDetDig(X,Res,Dig):-countDetDig(X,Res,Dig,0).
+countDetDig(0,Res,_,Res).
+countDetDig(X,Res,Dig,CurCnt):- X1 is X mod 10, (X1==Dig,NewCnt is CurCnt+1;NewCnt is CurCnt), X2 is X div 10, countDetDig(X2,Res,Dig,NewCnt).
+isUnique(X,Dig):-countDetDig(X,Res,Dig), Res==1.
+uniqCount(_,0,Res,Res):-!.
+uniqCount(X,CurX,Res,CurNum):-X1 is CurX mod 10, lenght(X,Leng), (X1=<Leng,isUnique(X,X1),NewN is CurNum+1;NewN is CurNum), X2 is CurX div 10, uniqCount(X,X2,Res,NewN).
+maxPand(N,Res):- maxPand(N,Res,0,0,0).
+maxPand(0,Res,_,2,Res):-!.
+maxPand(N,Res,Current,Marker,PreMax):-lenght(Current,Leng),Marker==0,(NewMark is 1, Leng=N;NewMark is Marker), Next is Current+1, maxPand(N,Res,Next,NewMark,PreMax).
+maxPand(_,Res,Current,Marker,PreMax):-Marker==2,maxPand(0,Res,Current,2,PreMax).
+maxPand(N,Res,Current,Marker,PreMax):-lenght(Current,Leng), (prost(Current), isPand(Current),NewMax is Current;NewMax is PreMax),Next is Current+1,(NewMark is 2,Leng>N;NewMark is Marker), maxPand(N,Res,Next,NewMark,NewMax).
 
