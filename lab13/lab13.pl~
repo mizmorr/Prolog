@@ -2,6 +2,12 @@ readlist(X,Y):-readlist([],X,0,Y).
 readlist(A,A,G,G):-!.
 readlist(A,B,C,D):- C1 is C+1,read(X),append(A,[X],A1),readlist(A1,B,C1,D).
 
+write_list([]) :- !.
+write_list([X|T]) :- write(X), nl, write_list(T).
+
+in_list([El|_],El).
+in_list([_|T],El):-in_list(T,El).
+
 %task11 - Min Even
 listmin([H|T],Res):-listmin([H|T],Res,H).
 listmin([],Res,Res):-!.
@@ -46,4 +52,33 @@ contains([_|T], N):- contains(T, N).
 
 countSmth(X,Res,List):-countSmth(X,Res,List,0).
 countSmth([],Res,_,Res):-!.
-countSmth
+countSmth([H|T],Res,List,CurN):- (contains(List,H),NewN is CurN+1;NewN is CurN), countSmth(T,Res,List,NewN).
+countDet(X,Res):- listAP(X,AP), countSmth(X,Res,AP).
+
+%task14
+
+task14:-
+    Color = [_,_,_],
+    in_list(Color,[belokurov,_]),
+    in_list(Color,[chernov,_]),
+    in_list(Color,[ryzhov,_]),
+    in_list(Color,[_,blond]),
+    in_list(Color,[_,black]),
+    in_list(Color,[_,redhead]),
+    not(in_list(Color,[belokurov,blond])),
+    not(in_list(Color,[chernov,black])),
+    not(in_list(Color,[ryzhov,redhead])),
+    write(Color),!.
+
+task124:-
+    Color = [_,_,_],
+    in_list(Color,[belokurov,_]),
+    in_list(Color,[chernov,_]),
+    in_list(Color,[ryzhov,_]),
+    in_list(Color,[_,blond]),
+    in_list(Color,[_,black]),
+    in_list(Color,[_,ginger]),
+    not(in_list(Color,[belokurov,blond])),
+    not(in_list(Color,[chernov,black])),
+    not(in_list(Color,[ryzhov,ginger])),
+    write(Color),!.
