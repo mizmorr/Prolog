@@ -69,3 +69,19 @@ task14:-
     not(in_list(Color,[chernov,black])),
     not(in_list(Color,[ryzhov,redhead])),
     write(Color),!.
+
+%task15
+
+task15:-
+    Color = [_,_,_],
+    in_list(Color,[anya,_,_]),
+    in_list(Color,[natasha,_,green]),
+    in_list(Color,[valya,_,_]),
+    in_list(Color,[_,blue,_]),
+    in_list(Color,[_,white,_]),
+    in_list(Color,[_,green,_]),
+    in_list(Color,[_,_,blue]),
+    in_list(Color,[_,_,white]),
+    not(in_list(Color,[valya,_,white])),
+    not(in_list(Color,[valya,white,_])),
+    write(Color),!.

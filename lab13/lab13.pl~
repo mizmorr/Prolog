@@ -70,15 +70,37 @@ task14:-
     not(in_list(Color,[ryzhov,redhead])),
     write(Color),!.
 
-task124:-
+%task15
+
+task15:-
     Color = [_,_,_],
-    in_list(Color,[belokurov,_]),
-    in_list(Color,[chernov,_]),
-    in_list(Color,[ryzhov,_]),
-    in_list(Color,[_,blond]),
-    in_list(Color,[_,black]),
-    in_list(Color,[_,ginger]),
-    not(in_list(Color,[belokurov,blond])),
-    not(in_list(Color,[chernov,black])),
-    not(in_list(Color,[ryzhov,ginger])),
+    in_list(Color,[anya,_,_]),
+    in_list(Color,[natasha,_,green]),
+    in_list(Color,[valya,_,_]),
+    in_list(Color,[_,blue,_]),
+    in_list(Color,[_,white,_]),
+    in_list(Color,[_,green,_]),
+    in_list(Color,[_,_,blue]),
+    in_list(Color,[_,_,white]),
+    not(in_list(Color,[valya,_,white])),
+    not(in_list(Color,[valya,white,_])),
     write(Color),!.
+
+task145:-
+    Girls = [_,_,_], %Имя, платье, туфли
+    in_list(Girls,[anya,_,_]),
+    in_list(Girls,[valya,_,_]),
+    in_list(Girls,[natasha,_,_]),
+    in_list(Girls,[_,white,_]),
+    in_list(Girls,[_,blue,_]),
+    in_list(Girls,[_,green,_]),
+    in_list(Girls,[_,_,white]),
+    in_list(Girls,[_,_,blue]),
+    in_list(Girls,[_,_,green]),
+    in_list(Girls,[anya,Same,Same]),
+    not(in_list(Girls,[valya,Same2,Same2])),
+    not(in_list(Girls,[natasha,Same3,Same3])),
+    not(in_list(Girls,[valya,_,white])),
+    not(in_list(Girls,[valya,white,_])),
+    in_list(Girls,[natasha,_,green]),
+    write(Girls),!.
