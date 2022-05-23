@@ -60,4 +60,47 @@ count([],Res,Res,_):-!.
 count([H|T],PreRes,Res,Marker):-
     (H==Marker, NewRes is Res+1;NewRes is Res),
     count(T,PreRes,NewRes,Marker).
-countmin([H|T],Res):- listmin([H|T],Res1),count([H|T],Res,Res1).
+
+countminAndMin([H|T],Res,Min):- listmin([H|T],Min),count([H|T],Res,Min).
+newlist(X,Res,Count,Numb):-newlist(X,Res,0,Count,Numb,[]).
+add([],[H|T],[H|T]):-!.
+add(E,[],[E]).
+add(E,[H|T],[H|T1]):-add(E,T,T1).
+newlist(_,Res,Count,Count,_,Res):-!.
+newlist([H|T],Res,CurC,Count,Numb,List):-
+(H\=Numb, CurC\=Count, add(H,List,NewList), NewCurc is CurC;(H==Numb, CurC\=Count, add(H,List,NewList),NewCurc is CurC+1 ;(CurC==Count,!))),
+newlist(T,Res,NewCurc,Count,Numb,NewList).
+wouthead(X,Res):-wouthead(X,Res,[]),!.
+wouthead([],Res,Res):-!.
+wouthead([_|T],Res,Preres):-!,add(Preres,T,Resl), wouthead([],Res,Resl).
+reverse2(L,X):-reverse2(L,X,[]),!.
+reverse2([],Z,Z):-!.
+reverse2([H|T],X,Acc):-reverse2(T,X,[H|Acc]).
+reslist(List,Res):-countminAndMin(List,Count,Min),newlist(List,NewL,Count,Min),reverse2(NewL,RevL),wouthead(RevL,WheadL),reverse2(WheadL,Res).
+
+%task15 (1.12)
+listmax([H|T],Res):-listmax([H|T],Res,H).
+listmax([],Res,Res):-!.
+listmax([H|T],Res,CurMax):-
+( H>CurMax, NewMax is H; NewMax is CurMax),
+listmax(T,Res,NewMax).
+head(X,Res):-head(X,Res,0).
+head([],Head,Head):-!.
+head([H|_],Res,PreRes):-PreRes is 0,NewRes is H, head([],Res,NewRes).
+mid(L,I1,I2,R):-mid(L,I1,I2,R,0,[]).
+mid([],_,_,Res,2,Res):-!.
+mid([H|T],I1,I2,R,Ci,Lis):- Ci==0,(H==I1,NewFlag is 1;NewFlag is 0), !,mid(T,I1,I2,R,NewFlag,Lis).
+mid([H|_],I1,I2,R,Ci,Lis):- H==I2,Ci=1,NewFlag is 2 ,!,mid([],I1,Ci,R,NewFlag,Lis).
+mid([H|T],I1,I2,R,Ci,Lis):- Ci ==1, append(Lis,[H],List),!,mid(T,I1,I2,R,Ci,List).
+until([H|T],Res,Val):-until([H|T],Res,Val,[]).
+until([],Res,_,Res):-!.
+until([H|_],Res,Value,CurList):- H==Value, until([],Res,Value,CurList).
+until([H|T],Res,Value,CurList):-add(H,CurList,NewList), until(T,Res,Value,NewList).
+untilmin(X,Res):-listmin(X,Min), until(X,Res,Min).
+after([H|T],Value,Res):-after([H|T],Value,Res,[],0).
+after([],_,Res,Res,1):-!.
+after([H|T],Value,Res,CurList,Marker):-Marker==0,(H==Value,NewM is 1;NewM is 0),after(T,Value,Res,CurList,NewM).
+after([H|T],Value,Res,CurList,Marker):- Marker==1, add(H,CurList,NewL), after(T,Value,Res,NewL,Marker).
+aftermax(X,Res):-listmax(X,Max), after(X,Max,PPPreRes),reverse2(PPPreRes,PPreRes),add(Max,PPreRes,PreRes),reverse2(PreRes,Res).
+mid(X,Res):-listmax(X,Max),listmin(X,Min),mid(X,Min,Max,Res).
+reslist12(X,Res):-untilmin(X,Unt), mid(X,PreMid),reverse2(PreMid,Mid), append(Unt,Mid,Preres), aftermax(X,Aft), append(Preres,Aft,Res).
