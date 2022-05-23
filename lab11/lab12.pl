@@ -128,3 +128,12 @@ evennumber(X,Res):-evennumber(X,Res,0).
 evennumber([],R,R):-!.
 evennumber([H|T],Res,CurNum):- (0 is H mod 2, NewN is CurNum+1; NewN is CurNum), evennumber(T,Res,NewN).
 
+%task19 (1.34)
+
+interval(X,A,B,Res):-interval(X,A,B,Res,0,[]).
+interval([],_,B,Interval,B,Interval):-!.
+interval([_|T],A,B,Res,N,CurInt):- N<A, N1 is N+1,interval(T,A,B,Res,N1,CurInt).
+interval([H|_],A,B,Res,N,CurInt):-N==B,add(H,CurInt,ResInt),  interval([],A,B,Res,B,ResInt).
+interval([H|T],A,B,Res,N,CurInt):- N1 is N+1, add(H,CurInt,Interval), interval(T,A,B,Res,N1,Interval).
+
+
