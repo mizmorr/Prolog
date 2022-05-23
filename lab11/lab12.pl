@@ -44,7 +44,7 @@ maxdeterm(X,Res):-minDeldown(X,G), maxdownN(X,Res,G).
 
 res(X,Res):-sumDigs(X,Res1),maxdeterm(X,Res2), Res is Res1*Res2,!.
 
-%task14 (1.9)
+%task14 (1.9) - Элементы до последнего минимума
 readL(0, []) :- !.
 readL(I, [X|T]) :- write("input - "),read(X), I1 is I - 1, readL(I1, T).
 
@@ -78,7 +78,7 @@ reverse2([],Z,Z):-!.
 reverse2([H|T],X,Acc):-reverse2(T,X,[H|Acc]).
 reslist(List,Res):-countminAndMin(List,Count,Min),newlist(List,NewL,Count,Min),reverse2(NewL,RevL),wouthead(RevL,WheadL),reverse2(WheadL,Res).
 
-%task15 (1.12)
+%task15 (1.12) - Реверс элементов между мин и макс
 listmax([H|T],Res):-listmax([H|T],Res,H).
 listmax([],Res,Res):-!.
 listmax([H|T],Res,CurMax):-
@@ -105,7 +105,7 @@ aftermax(X,Res):-listmax(X,Max), after(X,Max,PPPreRes),reverse2(PPPreRes,PPreRes
 mid(X,Res):-listmax(X,Max),listmin(X,Min),mid(X,Min,Max,Res).
 reslist12(X,Res):-untilmin(X,Unt), mid(X,PreMid),reverse2(PreMid,Mid), append(Unt,Mid,Preres), aftermax(X,Aft), append(Preres,Aft,Res).
 
-%task16 (1.22)
+%task16 (1.22) - Количество минимальных в интервале
 
 countSmth([H|T],A,B,Res,Value):-countSmth([H|T],A,B,Res,0,0,Value).
 countSmth([],_,B,Count,B,Count,_):-!.
@@ -114,3 +114,10 @@ countSmth([_|T],A,B,Res,N,CurCnt,Value):- N<A, N1 is N+1,countSmth(T,A,B,Res,N1,
 countSmth([H|T],A,B,Res,N,CurCnt,Value):- N1 is N+1, (H==Value,NewCnt is CurCnt+1;NewCnt is CurCnt), countSmth(T,A,B,Res,N1,NewCnt,Value).
 countMin(X,A,B,Res):-listmin(X,Min),countSmth(X,A,B,Res,Min).
 
+%task17 (1.24) - Два наибольших элемента
+
+listwout([H|T],Value,Res):-listwout([H|T],Value,Res,[]).
+listwout([],_,Res,Res):-!.
+listwout([H|T],Value,Res,CurList):-(H\=Value,add(H,CurList,NewL);add([],CurList,NewL)), listwout(T,Value,Res,NewL).
+listwoutmax(X,Res):-listmax(X,Max), listwout(X,Max,Res).
+twomax(X,Fst,Snd):- listmax(X,Fst), listwoutmax(X,Lwm), listmax(Lwm,Snd).
