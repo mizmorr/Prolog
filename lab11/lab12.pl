@@ -121,3 +121,10 @@ listwout([],_,Res,Res):-!.
 listwout([H|T],Value,Res,CurList):-(H\=Value,add(H,CurList,NewL);add([],CurList,NewL)), listwout(T,Value,Res,NewL).
 listwoutmax(X,Res):-listmax(X,Max), listwout(X,Max,Res).
 twomax(X,Fst,Snd):- listmax(X,Fst), listwoutmax(X,Lwm), listmax(Lwm,Snd).
+
+%task18 (1.31) - Количество четных
+
+evennumber(X,Res):-evennumber(X,Res,0).
+evennumber([],R,R):-!.
+evennumber([H|T],Res,CurNum):- (0 is H mod 2, NewN is CurNum+1; NewN is CurNum), evennumber(T,Res,NewN).
+
