@@ -8,7 +8,7 @@ listmin([],Res,Res):-!.
 listmin([H|T],Res,Cur):-
     (H<Cur, NewH is H; NewH is Cur),
     listmin(T,Res,NewH).
-
+add([],[],Res):-add([],[],Res).
 add([],[H|T],[H|T]):-!.
 add(E,[],[E]).
 add(E,[H|T],[H|T1]):-add(E,T,T1).
@@ -22,7 +22,7 @@ minEven(X,Min):-listEven(X,Res),listmin(Res,Min).
 %task12
 listNegat(X,Res):-listNegat(X,Res,[]).
 listNegat([],Res,Res):-!.
-listNegat([H|T],Res,CurL):-(H<0,add(H,CurL,NewL);append([],CurL,NewL)),listNegat(T,Res,NewL).
+listNegat([H|T],Res,CurL):-(H<0,add(H,CurL,NewL);add([],CurL,NewL)),listNegat(T,Res,NewL).
 listPos(X,Res):-listPos(X,Res,[]).
 listPos([],Res,Res):-!.
 listPos([H|T],Res,CurL):-(H>=0,add(H,CurL,NewL);add([],CurL,NewL)),listPos(T,Res,NewL).
