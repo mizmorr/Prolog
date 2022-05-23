@@ -85,3 +85,19 @@ task15:-
     not(in_list(Color,[valya,_,white])),
     not(in_list(Color,[valya,white,_])),
     write(Color),!.
+
+task16:-
+    Zavod = [_,_,_],
+    in_list(Zavod,[_,slesar,0,0]),
+    in_list(Zavod,[_,tokar,1,_]),
+    in_list(Zavod,[_,svarshik,_,_]),
+    in_list(Zavod,[borisov,_,_,1]),
+    in_list(Zavod,[ivanov,_,_,_]),
+    in_list(Zavod,[semenov,_,2,_]),
+    not(in_list(Zavod,[semenov,tokar,_,_])),
+    in_list(Zavod,[Name1,slesar,_,_]),
+    in_list(Zavod,[Name2,tokar,_,_]),
+    in_list(Zavod,[Name3,svarshik,_,_]),
+    write("result Name:"), nl, write("slesar - "), write(Name1),nl,
+    write("tokar  - "), write(Name2), nl,
+    write("svarshik - "),write(Name3),!.
