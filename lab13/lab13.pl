@@ -155,6 +155,12 @@ task18:-
     not(in_list(Artist,[voronov,writer])),
     not(in_list(Artist,[saharov,writer])),
     not(in_list(Artist,[voronov,artist])),
+    (
+    in_list(Artist,[voronov,artist]),
+    not(in_list(Artist,[levitskit,writer]));
+    not(in_list(Artist,[voronov,artist]),
+    in_list(Artist,[levitskit,writer]);
+    ),
     write(Artist),!.
 
 %task19
