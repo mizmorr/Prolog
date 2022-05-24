@@ -102,6 +102,7 @@ task16:-
     write("tokar  - "), write(Name2), nl,
     write("svarshik - "),write(Name3),!.
 
+%task17
 between(List,X,Y,Z):-leftInList(List,X,Y),rightInList(List,Z,Y);
     leftInList(List,Z,Y),rightInList(List,X,Y).
 
@@ -135,3 +136,52 @@ task17:-
     near(Jar,[cup,_],[banka,_]),
     near(Jar,[cup,_],[_,milk]),
     write(Jar),!.
+
+%task18
+task18:-
+    Artist=[_,_,_,_],
+    in_list(Artist,[voronov,_]),
+    in_list(Artist,[levitskiy,_]),
+    in_list(Artist,[pavlov,_]),
+    in_list(Artist,[saharov,_]),
+    in_list(Artist,[_,dancer]),
+    in_list(Artist,[_,artist]),
+    in_list(Artist,[_,singer]),
+    in_list(Artist,[_,writer]),
+    not(in_list(Artist,[voronov,singer])),
+    not(in_list(Artist,[levitskiy,singer])),
+    not(in_list(Artist,[pavlov,writer])),
+    not(in_list(Artist,[pavlov,artist])),
+    not(in_list(Artist,[voronov,writer])),
+    not(in_list(Artist,[saharov,writer])),
+    not(in_list(Artist,[voronov,artist])),
+    write(Artist),!.
+
+%task19
+
+task19:-
+    Sportsman=[_,_,_],
+    in_list(Sportsman,[michael,_,basketball,_]),
+    in_list(Sportsman,[_,american,_,_]),
+    in_list(Sportsman,[saimon,jew,_,_]),
+    in_list(Sportsman,[_,_,cricket,1]),
+    in_list(Sportsman,[_,australian,Name,_]),
+    in_list(Sportsman,[richard,_,Sport,_]),
+    in_list(Sportsman,[_,_,_,2]),
+    in_list(Sportsman,[_,_,_,3]),
+    in_list(Sportsman,[_,_,tennis,_]),
+    write("Australian is "), write(Name), nl,
+    write("Richard sport - "), write(Sport),!.
+
+%task20
+
+task20:-
+    Students=[_,_,_,_],
+    not(in_list(Students,[andrey,dmitry,boris,_]),
+    not(in_list(Students,[_,vicktor,boris,_]),
+    not(in_list(Students,[dmitry,grigory_,_]),
+    not(in_list(Students,[victor,andrey,_,_]),
+    not(in_list(Students,[_,andrey,victor,_]),
+
+
+

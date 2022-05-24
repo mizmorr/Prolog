@@ -101,3 +101,76 @@ task16:-
     write("result Name:"), nl, write("slesar - "), write(Name1),nl,
     write("tokar  - "), write(Name2), nl,
     write("svarshik - "),write(Name3),!.
+
+%task17
+between(List,X,Y,Z):-leftInList(List,X,Y),rightInList(List,Z,Y);
+    leftInList(List,Z,Y),rightInList(List,X,Y).
+
+
+leftInList([_],_,_):-fail.
+leftInList([X,Y|_],X,Y).
+leftInList([_|List],X,Y):- leftInList(List,X,Y).
+
+rightInList([_],_,_):-fail.
+rightInList([Y,X|_],X,Y).
+rightInList([_|List],X,Y):- rightInList(List,X,Y).
+
+near(List,X,Y):-rightInList(List,Y,X).
+near(List,X,Y):-leftInList(List,Y,X).
+
+task17:-
+    Jar = [_,_,_,_],
+    in_list(Jar,[bottle,_]),
+    in_list(Jar,[cup,_]),
+    in_list(Jar,[jug,_]),
+    in_list(Jar,[banka,_]),
+    in_list(Jar,[_,milk]),
+    in_list(Jar,[_,water]),
+    in_list(Jar,[_,limonad]),
+    in_list(Jar,[_,kvas]),
+    not(in_list(Jar,[bottle,milk])),
+    not(in_list(Jar,[bottle,water])),
+    between(Jar,[jug,_],[_,limonad],[_,kvas]),
+    not(in_list(Jar,[banka,water])),
+    not(in_list(Jar,[banka,limonad])),
+    near(Jar,[cup,_],[banka,_]),
+    near(Jar,[cup,_],[_,milk]),
+    write(Jar),!.
+
+%task18
+task18:-
+    Artist=[_,_,_,_],
+    in_list(Artist,[voronov,_]),
+    in_list(Artist,[levitskiy,_]),
+    in_list(Artist,[pavlov,_]),
+    in_list(Artist,[saharov,_]),
+    in_list(Artist,[_,dancer]),
+    in_list(Artist,[_,artist]),
+    in_list(Artist,[_,singer]),
+    in_list(Artist,[_,writer]),
+    not(in_list(Artist,[voronov,singer])),
+    not(in_list(Artist,[levitskiy,singer])),
+    not(in_list(Artist,[pavlov,writer])),
+    not(in_list(Artist,[pavlov,artist])),
+    not(in_list(Artist,[voronov,writer])),
+    not(in_list(Artist,[saharov,writer])),
+    not(in_list(Artist,[voronov,artist])),
+    write(Artist),!.
+
+%task19
+
+task19:-
+    Sportsman=[_,_,_],
+    in_list(Sportsman,[michael,_,basketball,_]),
+    in_list(Sportsman,[_,american,_,_]),
+    in_list(Sportsman,[saimon,jew,_,_]),
+    in_list(Sportsman,[_,_,cricket,1]),
+    in_list(Sportsman,[_,australian,Name,_]),
+    in_list(Sportsman,[richard,_,Sport,_]),
+    in_list(Sportsman,[_,_,_,2]),
+    in_list(Sportsman,[_,_,_,3]),
+    in_list(Sportsman,[_,_,tennis,_]),
+    write("Australian is "), write(Name), nl,
+    write("Richard sport - "), write(Sport),!.
+
+
