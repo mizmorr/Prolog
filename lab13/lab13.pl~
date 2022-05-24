@@ -155,6 +155,12 @@ task18:-
     not(in_list(Artist,[voronov,writer])),
     not(in_list(Artist,[saharov,writer])),
     not(in_list(Artist,[voronov,artist])),
+    (
+    in_list(Artist,[voronov,artist]),
+    not(in_list(Artist,[levitskit,writer]));
+    not(in_list(Artist,[voronov,artist]),
+    in_list(Artist,[levitskit,writer]);
+    ),
     write(Artist),!.
 
 %task19
@@ -172,5 +178,16 @@ task19:-
     in_list(Sportsman,[_,_,tennis,_]),
     write("Australian is "), write(Name), nl,
     write("Richard sport - "), write(Sport),!.
+
+%task20
+
+task20:-
+    Students=[_,_,_,_],
+    not(in_list(Students,[andrey,dmitry,boris,_]),
+    not(in_list(Students,[_,vicktor,boris,_]),
+    not(in_list(Students,[dmitry,grigory_,_]),
+    not(in_list(Students,[victor,andrey,_,_]),
+    not(in_list(Students,[_,andrey,victor,_]),
+
 
 

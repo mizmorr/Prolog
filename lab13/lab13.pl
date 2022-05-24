@@ -183,11 +183,30 @@ task19:-
 
 task20:-
     Students=[_,_,_,_],
-    not(in_list(Students,[andrey,dmitry,boris,_]),
-    not(in_list(Students,[_,vicktor,boris,_]),
-    not(in_list(Students,[dmitry,grigory_,_]),
-    not(in_list(Students,[victor,andrey,_,_]),
-    not(in_list(Students,[_,andrey,victor,_]),
+    ( in_list(Students,[andey,dmitry,_]),
+      not(in_list(Students,[boris,_,_]));
+      in_list(boris,_,_),
+      not(in_list(Students,[dmitry,victor,_]))
+     ),
+    (
+        in_list(Students,[victor,_,_]),
+        not(in_list(Students,[_,_,andrey]));
+        in_list(Students,[_,_,andrey]),
+        not(in_list(Students,[victor,_,_])
+    ),
+    (
+        in_list(Students,[_,dmitry,_]),
+        not(in_list(Students,[_,_,grigory]))
+     ),
+    (
+       in_list(Students,[_,dmitry,_],
+       not(in_list(Students,[boris,victor,_]));
+       in_list(Students,[_,victor,grigory],
+       not(in_list(Students,[_,dmitry,_]))
+
+    ),
+
+     write(Student),!.
 
 
 
